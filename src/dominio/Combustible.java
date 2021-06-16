@@ -1,16 +1,11 @@
 package dominio;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public abstract class Combustible {
-	private float precioLitro;
+	public abstract float calcularMonto(int litros, LocalDateTime fecha);
 
-	public Combustible(float precioLitro) throws RuntimeException {
-		if (precioLitro <= 0)
-			throw new RuntimeException("El precio debe ser mayor a 0");
-		this.precioLitro = precioLitro;
-	}
+	public abstract int id();
 
-	public abstract float calcularMonto(float litros, LocalDate fecha);
-
+	public abstract void setId(int id);
 }

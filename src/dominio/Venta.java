@@ -1,14 +1,15 @@
 package dominio;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Venta {
-	private LocalDate fecha;
-	private float litros;
+	private LocalDateTime fecha;
+	private int litros;
 	private Combustible combustible;
+	private float monto;
 
-	public Venta(LocalDate fecha, float litros, Combustible combustible) {
-		if (fecha.isAfter(LocalDate.now())) { // Se permiten crear ventas anterior a la fecha de carga
+	public Venta(LocalDateTime fecha, int litros, Combustible combustible) {
+		if (fecha.isAfter(LocalDateTime.now())) { // Se permiten crear ventas anterior a la fecha de carga
 			throw new RuntimeException("La fecha de la venta no puede ser mayor al día actual");
 		}
 		if (litros < 0) {
@@ -17,13 +18,26 @@ public class Venta {
 		this.combustible = combustible;
 		this.fecha = fecha;
 		this.litros = litros;
+		this.monto = this.combustible.calcularMonto(this.litros, this.fecha);
 	}
 
 	public float monto() {
-		return this.combustible.calcularMonto(this.litros, this.fecha);
+		return this.monto;
 	}
 
-	public LocalDate fecha() {
+	public LocalDateTime fecha() {
 		return this.fecha;
+	}
+
+	public int litros() {
+		return this.litros;
+	}
+
+	public Combustible combustible() {
+		return this.combustible;
+	}
+
+	public void setMonto(float monto) {
+		this.monto = monto;
 	}
 }

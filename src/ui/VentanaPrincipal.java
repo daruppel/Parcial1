@@ -1,43 +1,50 @@
 package ui;
 
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class VentanaPrincipal {
+import dominio.EstacionDeServicio;
 
+public class VentanaPrincipal {
+	private EstacionDeServicio estacionDeServicio;
 	private JFrame frame;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaPrincipal window = new VentanaPrincipal();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public VentanaPrincipal() {
+	public VentanaPrincipal(EstacionDeServicio estacion) {
+		this.estacionDeServicio = estacion;
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frame = new JFrame("Ventana Principal");
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 235, 210);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
 
+		JButton btnCargaCombustible = new JButton("Cargar combustible");
+		btnCargaCombustible.setBounds(24, 40, 161, 23);
+		frame.getContentPane().add(btnCargaCombustible);
+
+		btnCargaCombustible.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CargaDeVentas cc = new CargaDeVentas(estacionDeServicio);
+				cc.setVisible(true);
+			}
+		});
+
+		JButton btnListarVentas = new JButton("Listar ventas");
+		btnListarVentas.setBounds(24, 100, 161, 23);
+		frame.getContentPane().add(btnListarVentas);
+
+		btnListarVentas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListadoDeVentas listado = new ListadoDeVentas(estacionDeServicio);
+				listado.setVisible(true);
+			}
+		});
+
+	}
 }
