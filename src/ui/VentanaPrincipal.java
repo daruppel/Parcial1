@@ -7,13 +7,16 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import dominio.EstacionDeServicio;
+import mailPunto2TP6.VentasObservable;
 
 public class VentanaPrincipal {
 	private EstacionDeServicio estacionDeServicio;
+	private VentasObservable observable;
 	private JFrame frame;
 
-	public VentanaPrincipal(EstacionDeServicio estacion) {
+	public VentanaPrincipal(EstacionDeServicio estacion, VentasObservable observable) {
 		this.estacionDeServicio = estacion;
+		this.observable = observable;
 		initialize();
 	}
 
@@ -30,7 +33,7 @@ public class VentanaPrincipal {
 
 		btnCargaCombustible.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CargaDeVentas cc = new CargaDeVentas(estacionDeServicio);
+				CargaDeVentas cc = new CargaDeVentas(estacionDeServicio, observable);
 				cc.setVisible(true);
 			}
 		});

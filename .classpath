@@ -8,5 +8,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="mysql-connector-java-5.1.30.jar"/>
+	<classpathentry kind="lib" path="jakarta.activation-1.2.1.jar"/>
+	<classpathentry kind="lib" path="jakarta.mail-1.6.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

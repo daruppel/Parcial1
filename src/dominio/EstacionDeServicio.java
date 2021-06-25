@@ -20,9 +20,10 @@ public class EstacionDeServicio {
 		}
 	}
 
-	public void generarVenta(LocalDateTime fecha, int litros, Combustible combustible) {
+	public Venta generarVenta(LocalDateTime fecha, int litros, Combustible combustible) {
 		Venta v = new Venta(fecha, litros, combustible);
 		this.ventas.cargarVenta(fecha, litros, v.monto(), combustible);
+		return v;
 	}
 
 	public List<Combustible> tiposDeCombustibles() {

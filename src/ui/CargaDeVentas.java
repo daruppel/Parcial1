@@ -16,18 +16,20 @@ import javax.swing.border.EmptyBorder;
 
 import dominio.Combustible;
 import dominio.EstacionDeServicio;
+import mailPunto2TP6.VentasObservable;
 
 public class CargaDeVentas extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldLitros;
 	private EstacionDeServicio estacionDeServicio;
+	private JTextField textFieldMail;
 
-	public CargaDeVentas(EstacionDeServicio estacionDeServicio) {
+	public CargaDeVentas(EstacionDeServicio estacionDeServicio, VentasObservable observable) {
 		this.estacionDeServicio = estacionDeServicio;
 		setTitle("Carga de venta");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 325, 264);
+		setBounds(100, 100, 395, 338);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
@@ -44,7 +46,7 @@ public class CargaDeVentas extends JFrame {
 		contentPane.add(lblLitros);
 
 		JButton btnCargar = new JButton("Cargar venta");
-		btnCargar.setBounds(86, 191, 143, 23);
+		btnCargar.setBounds(34, 265, 143, 23);
 		contentPane.add(btnCargar);
 
 		JComboBox comboBox = new JComboBox();
@@ -55,7 +57,7 @@ public class CargaDeVentas extends JFrame {
 		comboBox.addItem(null);
 
 		JButton btnConsultarMonto = new JButton("Monto total");
-		btnConsultarMonto.setBounds(86, 139, 143, 23);
+		btnConsultarMonto.setBounds(34, 231, 143, 23);
 		contentPane.add(btnConsultarMonto);
 
 		btnConsultarMonto.addActionListener(new ActionListener() {
@@ -75,6 +77,15 @@ public class CargaDeVentas extends JFrame {
 		JLabel lblNewLabel = new JLabel("Tipo de combustible");
 		lblNewLabel.setBounds(31, 74, 172, 14);
 		contentPane.add(lblNewLabel);
+
+		JLabel lblemail = new JLabel("Correo del cliente");
+		lblemail.setBounds(34, 148, 172, 14);
+		contentPane.add(lblemail);
+
+		textFieldMail = new JTextField();
+		textFieldMail.setBounds(213, 145, 143, 20);
+		contentPane.add(textFieldMail);
+		textFieldMail.setColumns(10);
 		while (iterador.hasNext()) {
 			Combustible c = iterador.next();
 			comboBox.addItem(c);
@@ -85,8 +96,8 @@ public class CargaDeVentas extends JFrame {
 				if (comboBox.getSelectedItem() == null)
 					JOptionPane.showMessageDialog(null, "Debe seleccionar un tipo de combustible");
 				else {
-					estacionDeServicio.generarVenta(LocalDateTime.now(), Integer.parseInt(textFieldLitros.getText()),
-							(Combustible) comboBox.getSelectedItem());
+					observable.generarVenta(LocalDateTime.now(), Integer.parseInt(textFieldLitros.getText()),
+							(Combustible) comboBox.getSelectedItem(), textFieldMail.getText());
 					JOptionPane.showMessageDialog(null, "La venta se ha registrado exitosamente");
 				}
 			}

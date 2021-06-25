@@ -21,6 +21,10 @@ public class Venta {
 		this.monto = this.combustible.calcularMonto(this.litros, this.fecha);
 	}
 
+	public String toString() {
+		return (this.fecha + " , " + litros + " , " + monto + " , " + combustible.toString());
+	}
+
 	public float monto() {
 		return this.monto;
 	}
